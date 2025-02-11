@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  
+  postgres:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./fileuploader/var/lib/postgresql/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'fileuploader'  
+    networks:
+      - fileuploader-network 
+  fastapi-be:
+    container_name: fastapi-be
+    image: fileuploader_engine
+    build:
+      dockerfile: ..\backend\Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_DB=fileuploader
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DATASOURCE_URL=jdbc:postgresql://postgres:5432/fileuploader
+    networks:
+      - fileuploader-network 
+
+networks:
+  fileuploader-network:
+    driver: bridge
