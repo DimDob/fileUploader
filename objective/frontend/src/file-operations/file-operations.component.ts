@@ -1,56 +1,34 @@
-import { SharedService } from './../shared_service';
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from './file_operations_service';
+import { Component, output } from '@angular/core';
 import { User } from '../login-page/Interface/user_interface';
-import { Subscription } from 'rxjs';
+import { UploadFileComponent } from "./upload-file/upload-file.component";
+import { ReceiveFileComponent } from "./receive-file/receive-file.component";
+import { FileReceiveDialogComponent } from "./receive-file/dialog-overview/dialog-overview.component";
 
 @Component({
   selector: 'app-file-operations',
   standalone: true,
-  imports: [],
+  imports: [UploadFileComponent, ReceiveFileComponent, FileReceiveDialogComponent],
   templateUrl: './file-operations.component.html',
   styleUrls: ['./file-operations.component.css'],
 })
-export class FileOperationsComponent implements OnInit {
+export class FileOperationsComponent {
   selectedFile: File | undefined;
 
   public user!: User;
 
-  apiService = inject(ApiService);
-  sharedService = inject(SharedService);
+  onUserLogin = output<User>();
 
-  ngOnInit(): void {
-    this.sharedService.user$.subscribe(user => {
-      this.user = user;
-    })
+  constructor() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+      this.onUserLogin.emit(this.user)
+    }
   }
 
   onFileSelect(event: any): void {
     const file = event.target.files[0];
     this.selectedFile = file;
-  }
-
-  onUpload(): void {
-    if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
-      formData.append('userId', this.user.userId);
-
-      this.apiService.uploadFile(formData).subscribe(
-        (response) => {
-          console.log('File uploaded successfully!', response);
-        },
-        (error) => {
-          console.error('Error uploading file', error);
-        }
-      );
-    } else {
-      console.log('No file selected for upload');
-    }
-  }
-
-  onReceiveFile(): void {
-    console.log('Receiving file...');
   }
 
   onDownload(): void {

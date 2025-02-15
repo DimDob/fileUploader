@@ -1,16 +1,9 @@
 <div class="file-operations-container">
   <h1>File Operations</h1>
 
-  <section class="file-upload-section">
-    <h2>Upload a File</h2>
-    <input type="file" (change)="onFileSelect($event)" />
-    <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
-  </section>
+  <app-upload-file [user]="user"></app-upload-file>
 
-  <section class="file-receive-section">
-    <h2>Receive a File</h2>
-    <button (click)="onReceiveFile()">Receive File</button>
-  </section>
+  <app-receive-file [user]="user"></app-receive-file>
 
   <section class="file-download-section">
     <h2>Download a File</h2>

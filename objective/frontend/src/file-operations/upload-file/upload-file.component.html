@@ -1,1 +1,5 @@
-<p>upload-file works!</p>
+<section class="file-upload-section">
+  <h2>Upload a File</h2>
+  <input type="file" (change)="onFileSelect($event)" />
+  <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+</section>

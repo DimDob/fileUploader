@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Receive File</h2>
+  <mat-dialog-content>
+    <input type="text" [(ngModel)]="file.filename" placeholder="Please, here enter the name of the file you'd like to receive" />
+  </mat-dialog-content>
+
+  <mat-dialog-content>
+    <input type="text" [(ngModel)]="file.revision" placeholder="Please, here enter the revision of the file you'd like to receive" />
+  </mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onSubmit()">Submit</button>
+</mat-dialog-actions>
