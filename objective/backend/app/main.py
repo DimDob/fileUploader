@@ -6,6 +6,8 @@ from app import models, crud
 import shutil
 import os
 from contextlib import asynccontextmanager
+from fastapi import FastAPI, UploadFile, File
+from app.cors_config import get_cors_middleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -13,6 +15,8 @@ async def lifespan(app: FastAPI):
     yield  
 
 app = FastAPI(lifespan=lifespan)
+
+get_cors_middleware(app)
 
 UPLOAD_DIR = "uploaded_files"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
