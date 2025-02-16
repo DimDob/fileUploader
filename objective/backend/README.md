@@ -49,7 +49,8 @@ Navigate to the project directory and install the required dependencies (they ar
 
 ```bash
 cd fileUploader/objective/backend 
-npm install
+pip3 install -r requirements.txt
+
 ```
 
 ### RUNNING BACKEND & API

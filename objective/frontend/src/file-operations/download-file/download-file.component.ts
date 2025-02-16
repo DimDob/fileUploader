@@ -37,7 +37,7 @@ export class DownloadFileComponent {
         alert(`Download of file ${file.filename} started!`);
       },
       error: () => {
-        this.snackBar.open('Failed to download file', 'Close', snackbarConfig);
+        this.snackBar.open(`File '${file.filename}' has not been found!`, 'Close', snackbarConfig);
       }
     });
   }
