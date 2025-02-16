@@ -1,5 +1,5 @@
 import { Component, inject, output } from '@angular/core';
-import { User } from './Interface/user_interface';
+import { User } from './Interfaces/user_interface';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, of, Subject } from 'rxjs';

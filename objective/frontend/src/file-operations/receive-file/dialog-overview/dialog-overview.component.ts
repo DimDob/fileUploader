@@ -1,12 +1,12 @@
-import { File } from './../Interfaces/file';
+import { File } from '../../../login-page/Interfaces/file_interface';
 import { Component, inject, input, output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { File as CustomFile } from '../Interfaces/file'
+import { File as CustomFile } from '../../../login-page/Interfaces/file_interface'
 import { ApiService } from '../../file_operations_service';
-import { User } from '../../../login-page/Interface/user_interface';
+import { User } from '../../../login-page/Interfaces/user_interface';
 @Component({
   selector: 'app-dialog-overview',
   templateUrl: './dialog-overview.component.html',

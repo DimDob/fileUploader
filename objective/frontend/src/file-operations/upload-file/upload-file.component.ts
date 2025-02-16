@@ -1,14 +1,14 @@
 import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../login-page/Interface/user_interface';
+import { User } from '../../login-page/Interfaces/user_interface';
 import { ApiService } from '../file_operations_service';
 
 @Component({
   selector: 'app-upload-file',
   standalone: true,
-  imports: [FormsModule ],
+  imports: [FormsModule],
   templateUrl: './upload-file.component.html',
-  styleUrl: './upload-file.component.css'
+  styleUrls: ['./upload-file.component.css']
 })
 export class UploadFileComponent {
   selectedFile: File | undefined;
@@ -28,20 +28,14 @@ export class UploadFileComponent {
       formData.append('file', this.selectedFile);
       formData.append('userId', this.user()!.userId);
 
-      this.apiService.uploadFile(formData).subscribe(
-       {
-        complete() {
-            alert(`File uploaded successfully!`)
-          },
-          error() {
-            () => {
-              alert('Error uploading file');
-            }
-          },
+      this.apiService.uploadFile(formData).subscribe({
+        error: () => {
+          alert('Error uploading file');
         },
-      );
-    } else {
-      console.log('No file selected for upload');
+        complete: () => {
+          alert(`File ${this.selectedFile!.name} has been successfully uploaded!`);
+        }
+      });
     }
   }
 }
