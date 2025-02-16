@@ -56,8 +56,8 @@ pip3 install -r requirements.txt
 ### RUNNING BACKEND & API
 
 Make sure the backend server is running. In order to run the backend you could try to do it with
-**docker-compose up --build / docker-compose -d 
-** if it doesn't work out you can do it in the terminal using *python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000*
+*docker-compose up --build / docker-compose -d*, because i've deployed them into separate docker containers.
+** If the docker containers won't start, then you could do it directly in the terminal using *python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000*
 
 ### Running the DB
 
